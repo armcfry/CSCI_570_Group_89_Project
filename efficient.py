@@ -153,7 +153,6 @@ class EfficientAlgorithm:
     def run_efficient_algorithm(self):
         aligned_X, aligned_Y = self.hirschberg(self.str1, self.str2)
         self.aligned_result = [aligned_X, aligned_Y]
-        # Run Hirschberg on the two generated strings, store alignment and compute final alignment cost.
         self.min_cost_align = self.compute_cost(aligned_X, aligned_Y)
 
     def compute_cost(self, a: str, b: str) -> int:
@@ -191,7 +190,7 @@ class EfficientAlgorithm:
 
 if __name__ == "__main__":
 
-    # If run without arguments then unit test
+    # If run without arguments then go to unit test
     if len(sys.argv) == 1:
         print("Running full_dp_small() unit tests...\n")
         tester = EfficientAlgorithm("", "")
