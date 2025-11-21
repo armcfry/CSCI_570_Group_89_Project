@@ -130,18 +130,21 @@ class EfficientAlgorithm:
         return "".join(aligned_X), "".join(aligned_Y)
         #pass
 
-    # TODO:forward DP, O(len(Y)) space?
+
     def nw_score_prefix(self, X: str, Y: str):
+        # TODO:forward DP, O(len(Y)) space?
         pass
 
-    # TODO:backward DP
+
     def nw_score_suffix(self, X: str, Y: str):
+        # TODO:backward DP
         pass
 
-    # TODO:Hirschberg Recursive Divide-and-Conquer Algorithm, the one mentioned in Lecture 8
+
     def hirschberg(self, X: str, Y: str):
-        #  Recursive Hirschberg algorithm.
-        #  Returns a pair (aligned_X, aligned_Y).
+        # TODO:Hirschberg Recursive Divide-and-Conquer Algorithm, the one mentioned in Lecture 8
+        # Recursive Hirschberg algorithm.
+        # Returns a pair (aligned_X, aligned_Y).
         # base case：len(X)==0 / len(Y)==0 / small，use full_dp_small
         # otherwise recursive backward and forward
         pass
