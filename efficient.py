@@ -163,7 +163,39 @@ class EfficientAlgorithm:
         return cost
 
 
+    def test_full_dp_small(self):
+        test_cases = [
+            ("A", "G"),
+            ("A", "A"),
+            ("A", ""),
+            ("", "T"),
+            ("AG", "A"),
+            ("AG", "GA"),
+            ("G", "TA"),
+            ("AC", "GT"),
+        ]
+
+        for X, Y in test_cases:
+            aligned_X, aligned_Y = self.full_dp_small(X, Y)
+            cost = self.compute_cost(aligned_X, aligned_Y)
+            print("X =", X, " Y =", Y)
+            print("  aligned X:", aligned_X)
+            print("  aligned Y:", aligned_Y)
+            print("  cost:", cost)
+            print("-" * 40)
+
+
+
 if __name__ == "__main__":
+
+    # If run without arguments then unit test
+    if len(sys.argv) == 1:
+        print("Running full_dp_small() unit tests...\n")
+        tester = EfficientAlgorithm("", "")
+        tester.test_full_dp_small()
+        sys.exit(0)
+
+    # Else normal workflow
     file_input = sys.argv[1]
     file_output = sys.argv[2]
 
