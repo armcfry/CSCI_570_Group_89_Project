@@ -133,12 +133,27 @@ class EfficientAlgorithm:
 
     def nw_score_prefix(self, X: str, Y: str):
         # TODO:forward DP, O(len(Y)) space?
-        pass
-
+        n = len(Y)
+        prev_r = [j*self.delta for j in range(n+1)] # previous row
+        for i in range(1, len(X)+1):
+            curr_r = [0] * (n+1) # current row
+            curr_r[0] = i * self.delta # intializing the first column
+            for j in range(1, n+1):
+                cost_Y_gap = prev_r[j] + self.delta
+                cost_X_gap = curr_r[j-1] + self.delta
+                X_Y_key = X[i-1] + '_' + Y[j-1] # to find the mismatch cost
+                cost_match = prev_r[j-1] + self.alpha_vals[X_Y_key]
+                curr_r[j] = min(cost_X_gap, cost_Y_gap, cost_match)
+            
+            prev_r = curr_r
+        return prev_r
 
     def nw_score_suffix(self, X: str, Y: str):
         # TODO:backward DP
-        pass
+        rev_X = X[::-1] # reversing X
+        rev_Y = Y[::-1] # reversing Y
+        score_row = self.nw_score_prefix(rev_X, rev_Y) # applying the forward DP on reversed string to get the output
+        return score_row[::-1] # reverse again to get the output for backward DP (to align with forward pass indices) 
 
 
     def hirschberg(self, X: str, Y: str):
@@ -147,7 +162,27 @@ class EfficientAlgorithm:
         # Returns a pair (aligned_X, aligned_Y).
         # base case：len(X)==0 / len(Y)==0 / small，use full_dp_small
         # otherwise recursive backward and forward
-        pass
+        m = len(X)
+        n = len(Y)
+        if m <= 2 or n <= 2: # base case --> if the problem is small enough, we can use standard full DP matrix method
+            return self.full_dp_small(X, Y)
+        x_mid = m//2 # finding the mid of X to split from middle
+        # conquer step: calculating scores accross two  halves
+        score_L = self.nw_score_prefix(X[:x_mid], Y) # finding the cost of aligning X[:mid] with Y (Y[:k]) (forward calculation)
+        score_R = self.nw_score_suffix(X[x_mid:], Y) # finding the cost of aligning X[mid:] with Y (Y[k:]) (backward calculation)
+        min_total = float('inf')
+        y_split_p = -1 # split point i in Y which minimizes the total cost (the optimal path should pass through x_mid, y_split_p)
+        for i in range(n+1):
+            total = score_L[i] + score_R[i]
+            if total < min_total:
+                min_total = total
+                y_split_p = i
+
+        # doing the recursive call into two sub problems
+        left_X_solution, left_Y_solution = self.hirschberg(X[:x_mid], Y[:y_split_p]) # finding the top left quadrant
+        right_X_solution, right_Y_solution = self.hirschberg(X[x_mid:], Y[y_split_p:]) # finding the bottom right quadrant
+        return left_X_solution + right_X_solution, left_Y_solution + right_Y_solution # combine final results
+
 
     # Efficient algorithm main Entry
     def run_efficient_algorithm(self):
