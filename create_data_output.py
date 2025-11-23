@@ -3,7 +3,7 @@ import subprocess
 import re
 
 # Path to your input folder
-INPUT_FOLDER = "/Users/armcfry/repos/CSCI_570_Group_89_Project/CSCI570_Project_Minimum_Jul_14-2/Datapoints"
+INPUT_FOLDER = "./CSCI570_Project_Minimum_Jul_14-2/Datapoints"
 
 # Path to your bash script
 SCRIPT = "./efficient.sh"
