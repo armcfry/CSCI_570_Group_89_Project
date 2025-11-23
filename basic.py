@@ -19,7 +19,7 @@ class BasicAlgorithm:
         self.memory = 0
         self.min_cost_align = 0
 
-    def read_input(self) -> str:
+    def read_input(self) -> None:
         str_info = []
         string = ""
         indeces = []

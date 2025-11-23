@@ -84,7 +84,7 @@ def plot_results(basic, efficient):
 
 
 if __name__ == "__main__":
-    basic_results = load_folder("/Users/armcfry/repos/CSCI_570_Group_89_Project/CSCI570_Project_Minimum_Jul_14-2/Datapoints/basic_alg_output")
-    efficient_results = load_folder("/Users/armcfry/repos/CSCI_570_Group_89_Project/CSCI570_Project_Minimum_Jul_14-2/Datapoints/efficient_alg_output")
+    basic_results = load_folder("./CSCI570_Project_Minimum_Jul_14-2/Datapoints/basic_alg_output")
+    efficient_results = load_folder("./CSCI570_Project_Minimum_Jul_14-2/Datapoints/efficient_alg_output")
 
     plot_results(basic_results, efficient_results)
