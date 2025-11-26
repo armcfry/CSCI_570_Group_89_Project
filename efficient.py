@@ -73,8 +73,8 @@ class EfficientAlgorithm:
 
     # full dp for small cases, modified from basic.py
     def full_dp_small(self, X: str, Y: str):
-        #Standard DP for small subproblems |X| <= 1 or |Y| <= 1).
-        #Returns aligned strings (aligned_X, aligned_Y).
+        # Standard DP for small subproblems |X| <= 1 or |Y| <= 1).
+        # Returns aligned strings (aligned_X, aligned_Y).
         lenX = len(X)
         lenY = len(Y)
 
@@ -132,7 +132,7 @@ class EfficientAlgorithm:
 
 
     def nw_score_prefix(self, X: str, Y: str):
-        # TODO:forward DP, O(len(Y)) space?
+        # forward DP
         n = len(Y)
         prev_r = [j*self.delta for j in range(n+1)] # previous row
         for i in range(1, len(X)+1):
@@ -149,7 +149,7 @@ class EfficientAlgorithm:
         return prev_r
 
     def nw_score_suffix(self, X: str, Y: str):
-        # TODO:backward DP
+        # backward DP
         rev_X = X[::-1] # reversing X
         rev_Y = Y[::-1] # reversing Y
         score_row = self.nw_score_prefix(rev_X, rev_Y) # applying the forward DP on reversed string to get the output
@@ -157,11 +157,8 @@ class EfficientAlgorithm:
 
 
     def hirschberg(self, X: str, Y: str):
-        # TODO:Hirschberg Recursive Divide-and-Conquer Algorithm, the one mentioned in Lecture 8
-        # Recursive Hirschberg algorithm.
+        # Hirschberg Recursive Divide-and-Conquer Algorithm, the one mentioned in Lecture 8
         # Returns a pair (aligned_X, aligned_Y).
-        # base case：len(X)==0 / len(Y)==0 / small，use full_dp_small
-        # otherwise recursive backward and forward
         m = len(X)
         n = len(Y)
         if m <= 2 or n <= 2: # base case --> if the problem is small enough, we can use standard full DP matrix method
